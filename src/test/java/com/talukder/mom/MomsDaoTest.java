@@ -21,7 +21,7 @@ public class MomsDaoTest extends MeetingOfMinutesApplicationTests {
 		moms.setMomSubject(momsSubject);
 		moms.setCreated(new Date());
 		moms.setUpdated(new Date());
-		momsDao.save(moms);
+		momsDao.addNew(moms);
 	}
 
 

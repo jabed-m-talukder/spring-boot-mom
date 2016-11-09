@@ -24,7 +24,7 @@ import com.talukder.mom.domain.Moms;
 import com.talukder.mom.model.MomsDao;
 
 @Controller
-@RequestMapping(value = "/moms")
+@RequestMapping(value = "/")
 public class MomsController {
 
 	@Autowired
@@ -50,12 +50,27 @@ public class MomsController {
 			objMom.setMom(momsBody);
 			objMom.setCreated(new Date());
 			objMom.setUpdated(new Date());
-			objMomDao.save(objMom);
+			objMomDao.addNew(objMom);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.getMessage();
 		}
 
 		return "Moms created successfully";
+	}
+
+	@RequestMapping(value = "/delete")
+	@ResponseBody
+	String deleteMoms(int id) {
+		Moms mom = objMomDao.geMomsById(id);
+		try {
+			objMomDao.delete(mom);
+
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		String tempStr = "Deleted: " + mom.getId() + "-> " + mom.getMomSubject();
+		return tempStr;
+
 	}
 
 	private void sendEmailUsingSendGrid() {

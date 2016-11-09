@@ -35,6 +35,21 @@ public class Moms {
 	@Temporal(TemporalType.TIMESTAMP)
 	Date updated;
 
+	public Moms() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Moms(int id) {
+		this.id = id;
+
+	}
+
+	public Moms(String subject, String mom) {
+		this.mom_subject = subject;
+		this.mom = mom;
+
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}

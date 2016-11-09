@@ -23,7 +23,7 @@ public class MomsDaoImpl implements MomsDao {
 	}
 
 	@Override
-	public void save(Moms m) {
+	public void addNew(Moms m) {
 		getSession().save(m);
 
 	}
@@ -33,6 +33,26 @@ public class MomsDaoImpl implements MomsDao {
 	public List<Moms> list() {
 		return getSession().createQuery("from Moms").list();
 
+	}
+
+	@Override
+	public void delete(Moms mom) {
+		getSession().delete(mom);
+	}
+
+	@Override
+	public void update(Moms mom) {
+		getSession().clear();
+		getSession().update(mom);
+
+	}
+
+	@Override
+	public Moms geMomsById(int id) {
+		Moms objMom = (Moms) getSession().createQuery("from Moms where id=:id")
+				.setParameter("id", id)
+				.uniqueResult();
+		return objMom;
 	}
 
 }
