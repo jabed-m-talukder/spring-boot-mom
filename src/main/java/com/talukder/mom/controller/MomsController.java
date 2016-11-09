@@ -2,9 +2,14 @@ package com.talukder.mom.controller;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,24 +24,27 @@ import com.talukder.mom.domain.Moms;
 import com.talukder.mom.model.MomsDao;
 
 @Controller
-@RequestMapping(value="/moms")
+@RequestMapping(value = "/moms")
 public class MomsController {
-	
+
 	@Autowired
 	private MomsDao objMomDao;
 
 	private final String SENDGRID_API_KEY = "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";
-	
+
 	@RequestMapping("/")
-	String index() {
-		//sendEmailUsingSendGrid();
+	String index(Model model, HttpSession session) {
+		// sendEmailUsingSendGrid();
+		List<Moms> objMoms = objMomDao.list();
+		model.addAttribute("momsList", objMoms);
 		return "MoMmain";
+
 	}
-	
-	@RequestMapping(value="/newmoms")
+
+	@RequestMapping(value = "/newmoms")
 	@ResponseBody
-	public String CreateNewMoms(String momsSubject, String momsBody){
-		try{
+	public String CreateNewMoms(String momsSubject, String momsBody) {
+		try {
 			Moms objMom = new Moms();
 			objMom.setMomSubject(momsSubject);
 			objMom.setMom(momsBody);
@@ -46,11 +54,11 @@ public class MomsController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+
 		return "Moms created successfully";
 	}
-	
-	private void sendEmailUsingSendGrid(){
+
+	private void sendEmailUsingSendGrid() {
 		Email from = new Email("admin@otta-payment.com");
 		String subject = "Hello World from the SendGrid Java Library";
 		Email to = new Email("jabed.talukder@bjitgroup.com");

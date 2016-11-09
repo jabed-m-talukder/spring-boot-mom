@@ -14,24 +14,24 @@ import com.talukder.mom.domain.Moms;
 @Repository
 @Transactional
 public class MomsDaoImpl implements MomsDao {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	private Session getSession(){
+	private Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	@Override
 	public void save(Moms m) {
 		getSession().save(m);
-		
+
 	}
-	
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Moms> list() {
-		return getSession().createQuery("from moms").list();
+		return getSession().createQuery("from Moms").list();
 
 	}
 

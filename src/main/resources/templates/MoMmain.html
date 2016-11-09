@@ -2,14 +2,36 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="jp">
 
-    <title>Spring Framework Guru</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    
+<title>Meeting-of-Minutes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
 </head>
 <body>
-<h1>Hello</h1>
-<div th:include="fragments/js :: jquerys"></div>
-<div th:include="fragments/js :: bootstrap"></div>
-<h2>Gurus!!!</h2>
+	<div th:include="fragments/js :: jquerys"></div>
+	<div th:include="fragments/js :: bootstrap"></div>
+	<div class="container">
+		<h1 class="header_logo">
+			<a th:href="@{/moms/}"><img
+				th:src="@{/img/meeting-minutes.png}" width="100"
+				height="100" alt="" /></a>
+		</h1>
+	</div>
+	<div class="container" th:if="${not #lists.isEmpty(momsList)}">
+		<table class="table table-hover">
+			<h3>List</h3>
+			<tr>
+				<th>ID</th>
+				<th>Subject</th>
+				<th>Details</th>
+				<th>Edit/Update</th>
+			</tr>
+			<tr th:each="mom : ${momsList}">
+				<td th:text="${mom.getId()}"></td>
+				<td th:text="${mom.getMomSubject()}"></td>
+				<td th:text="${mom.getMom()}"></td>
+				<td><a th:href="@{'/planEdit/' + ${mom.id}}">編集</a></td>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>

@@ -35,7 +35,7 @@ public class DatabaseConfig {
 	private String HIBERNATE_SHOW_SQL;
 
 	@Value("${hibernate.hbm2ddl.auto}")
-  private String HIBERNATE_HBM2DDL_AUTO;
+	private String HIBERNATE_HBM2DDL_AUTO;
 
 	@Value("${entitymanager.packagesToScan}")
 	private String ENTITYMANAGER_PACKAGES_TO_SCAN;
