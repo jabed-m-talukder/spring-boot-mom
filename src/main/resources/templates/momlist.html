@@ -26,9 +26,9 @@
 			</tr>
 			<tr th:each="mom : ${momsList}">
 				<td th:text="${mom.getId()}"></td>
-				<td th:text="${mom.getMomSubject()}"></td>
+				<td th:text="${mom.getMomsubject()}"></td>
 				<td th:text="${mom.getMom()}"></td>
-				<td><a th:button="@{'/delete?id=' + ${mom.id}}" class="btn btn-danger btn-sm">Delete</a></td>
+				<td><a th:button="@{'/delete?id=' + ${mom.getId()}}" class="btn btn-danger btn-sm">Delete</a></td>
 			</tr>
 		</table>
 	</div>

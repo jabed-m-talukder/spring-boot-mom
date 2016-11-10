@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="jp">
+
+<title>Meeting-of-Minutes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+<body>
+	<div th:include="fragments/js :: jquerys"></div>
+	<div th:include="fragments/js :: bootstrap"></div>
+	<div class="container">
+		<h1 class="header_logo">
+			<a th:href="@{/moms/}"><img th:src="@{/img/meeting-minutes.png}"
+				width="100" height="100" alt="" /></a>
+		</h1>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">New meeting MoM</div>
+			<form action="#" th:action="@{/newmoms}" th:object="${mom}"
+				class="form-horizontal" method="post">
+				<p>
+					Subject: <input type="text" class="form-control"
+						th:field="*{momsubject}" />
+				</p>
+				<p>
+					<textarea class="form-control" rows="10" id="" th:field="*{mom}"></textarea>
+				</p>
+				<p>
+					<input type="submit" class="btn btn-default" value="Submit" /> 
+					<input type="reset" class="btn btn-default" value="Reset" />
+				</p>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

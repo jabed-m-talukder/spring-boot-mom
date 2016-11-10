@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sendgrid.Content;
@@ -37,25 +38,29 @@ public class MomsController {
 		// sendEmailUsingSendGrid();
 		List<Moms> objMoms = objMomDao.list();
 		model.addAttribute("momsList", objMoms);
-		return "MoMmain";
+		return "momlist";
 
 	}
 
-	@RequestMapping(value = "/newmoms")
-	@ResponseBody
-	public String CreateNewMoms(String momsSubject, String momsBody) {
+	@RequestMapping(value = "/newmoms", method = RequestMethod.GET)
+	public String createNewMoms(Model model) {
+		model.addAttribute("mom", new Moms());
+		return "new_moms";
+	}
+
+	@RequestMapping(value = "/newmoms", method = RequestMethod.POST)
+	public String submitNewMoms(@ModelAttribute Moms mom, Model model) {
 		try {
-			Moms objMom = new Moms();
-			objMom.setMomSubject(momsSubject);
-			objMom.setMom(momsBody);
-			objMom.setCreated(new Date());
-			objMom.setUpdated(new Date());
-			objMomDao.addNew(objMom);
+			mom.setCreated(new Date());
+			mom.setUpdated(new Date());
+			objMomDao.addNew(mom);
+			model.addAttribute("mom", mom);
+			
 		} catch (Exception e) {
 			e.getMessage();
 		}
-
-		return "Moms created successfully";
+		
+		return "newmoms_success";
 	}
 
 	@RequestMapping(value = "/delete")
@@ -68,7 +73,7 @@ public class MomsController {
 		} catch (Exception e) {
 			e.getMessage();
 		}
-		String tempStr = "Deleted: " + mom.getId() + "-> " + mom.getMomSubject();
+		String tempStr = "Deleted: " + mom.getId() + "-> " + mom.getMomsubject();
 		return tempStr;
 
 	}

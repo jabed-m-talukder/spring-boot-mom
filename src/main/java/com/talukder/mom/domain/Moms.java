@@ -22,7 +22,7 @@ public class Moms {
 	private int id;
 
 	@Column(name = "mom_subject")
-	private String mom_subject;
+	private String momsubject;
 
 	@Column(name = "mom")
 	private String mom;
@@ -45,7 +45,7 @@ public class Moms {
 	}
 
 	public Moms(String subject, String mom) {
-		this.mom_subject = subject;
+		this.momsubject = subject;
 		this.mom = mom;
 
 	}
@@ -58,12 +58,12 @@ public class Moms {
 		return this.id;
 	}
 
-	public void setMomSubject(String subject) {
-		this.mom_subject = subject;
+	public void setMomsubject(String momsubject) {
+		this.momsubject = momsubject;
 	}
 
-	public String getMomSubject() {
-		return this.mom_subject;
+	public String getMomsubject() {
+		return this.momsubject;
 	}
 
 	public void setMom(String mom) {
@@ -76,7 +76,7 @@ public class Moms {
 
 	@Override
 	public String toString() {
-		return "Id= " + this.id + "MomSubject: " + this.mom_subject + "Mom: " + this.mom;
+		return "Id= " + this.id + "MomSubject: " + this.momsubject + "Mom: " + this.mom;
 	}
 
 	public void setCreated(Date date) {
