@@ -15,11 +15,10 @@
 				width="100" height="100" alt="" /></a>
 		</h1>
 		<div class="panel panel-default">
-			<div class="panel-heading">New meeting MoM added</div>
+			<div class="panel-heading">MoM deleted successfully</div>
 			<p th:text="'Subject: ' + ${mom.getMomsubject()}" />
 			<p th:text="'Body: ' + ${mom.getMom()}" />
-			<a th:href="@{'/newmoms'}" class="btn btn-default">Submit another moms</a>
-			<a th:href="@{'/'}" class="btn btn-default">Back</a>
+			<a th:href="@{'/'}" class="btn btn-info">Back</a>
 		</div>
 	</div>
 </body>

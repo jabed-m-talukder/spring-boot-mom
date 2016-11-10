@@ -11,13 +11,14 @@
 	<div th:include="fragments/js :: bootstrap"></div>
 	<div class="container">
 		<h1 class="header_logo">
-			<a th:href="@{/moms/}"><img th:src="@{/img/meeting-minutes.png}"
+			<a th:href="@{/}"><img th:src="@{/img/meeting-minutes.png}"
 				width="100" height="100" alt="" /></a>
 		</h1>
 	</div>
 	<div class="container" th:if="${not #lists.isEmpty(momsList)}">
 		<table class="table table-hover">
-			<h3>List</h3>
+						<a th:href="@{/newmoms}"><img th:src="@{/img/blue-add-note-new.png}"
+				width="50" height="50" alt="" align="right"/></a>
 			<tr>
 				<th>ID</th>
 				<th>Subject</th>
@@ -28,7 +29,7 @@
 				<td th:text="${mom.getId()}"></td>
 				<td th:text="${mom.getMomsubject()}"></td>
 				<td th:text="${mom.getMom()}"></td>
-				<td><a th:button="@{'/delete?id=' + ${mom.getId()}}" class="btn btn-danger btn-sm">Delete</a></td>
+				<td><a th:href="@{'/delete?id=' + ${mom.getId()}}" class="btn btn-danger btn-sm">Delete</a></td>
 			</tr>
 		</table>
 	</div>

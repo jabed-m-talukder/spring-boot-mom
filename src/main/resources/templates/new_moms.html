@@ -11,7 +11,7 @@
 	<div th:include="fragments/js :: bootstrap"></div>
 	<div class="container">
 		<h1 class="header_logo">
-			<a th:href="@{/moms/}"><img th:src="@{/img/meeting-minutes.png}"
+			<a th:href="@{/}"><img th:src="@{/img/meeting-minutes.png}"
 				width="100" height="100" alt="" /></a>
 		</h1>
 
@@ -29,6 +29,7 @@
 				<p>
 					<input type="submit" class="btn btn-default" value="Submit" /> 
 					<input type="reset" class="btn btn-default" value="Reset" />
+					<a th:href="@{'/'}" class="btn btn-default">Back</a>
 				</p>
 			</form>
 		</div>

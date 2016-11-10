@@ -64,17 +64,17 @@ public class MomsController {
 	}
 
 	@RequestMapping(value = "/delete")
-	@ResponseBody
-	String deleteMoms(int id) {
+	String deleteMoms(int id, Model model) {
 		Moms mom = objMomDao.geMomsById(id);
+		model.addAttribute("mom", mom);
 		try {
 			objMomDao.delete(mom);
 
 		} catch (Exception e) {
 			e.getMessage();
 		}
-		String tempStr = "Deleted: " + mom.getId() + "-> " + mom.getMomsubject();
-		return tempStr;
+//		String tempStr = "Deleted: " + mom.getId() + "-> " + mom.getMomsubject();
+		return "delete_success";
 
 	}
 
