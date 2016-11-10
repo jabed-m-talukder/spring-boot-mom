@@ -55,6 +55,7 @@ public class MomsController {
 			mom.setUpdated(new Date());
 			objMomDao.addNew(mom);
 			model.addAttribute("mom", mom);
+			sendEmailUsingSendGrid(mom.getMomsubject(), mom.getMom());
 			
 		} catch (Exception e) {
 			e.getMessage();
@@ -78,11 +79,11 @@ public class MomsController {
 
 	}
 
-	private void sendEmailUsingSendGrid() {
-		Email from = new Email("admin@otta-payment.com");
-		String subject = "Hello World from the SendGrid Java Library";
+	private void sendEmailUsingSendGrid(String sub, String body) {
+		Email from = new Email("admin@free-moms.io");
+		String subject = sub;
 		Email to = new Email("jabed.talukder@bjitgroup.com");
-		Content content = new Content("text/plain", "some text here");
+		Content content = new Content("text/plain", body);
 		Mail mail = new Mail(from, subject, to, content);
 
 		SendGrid sg = new SendGrid(SENDGRID_API_KEY);
