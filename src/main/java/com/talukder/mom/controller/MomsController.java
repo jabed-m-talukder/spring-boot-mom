@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import com.sendgrid.Content;
 import com.sendgrid.Email;
@@ -23,6 +23,7 @@ import com.sendgrid.Response;
 import com.sendgrid.SendGrid;
 import com.talukder.mom.domain.Moms;
 import com.talukder.mom.model.MomsDao;
+import com.talukder.mom.common.Constants;
 
 @Controller
 @RequestMapping(value = "/")
@@ -31,11 +32,8 @@ public class MomsController {
 	@Autowired
 	private MomsDao objMomDao;
 
-	private final String SENDGRID_API_KEY = "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";
-
-	@RequestMapping("/")
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	String index(Model model, HttpSession session) {
-		// sendEmailUsingSendGrid();
 		List<Moms> objMoms = objMomDao.list();
 		model.addAttribute("momsList", objMoms);
 		return "momlist";
@@ -55,12 +53,12 @@ public class MomsController {
 			mom.setUpdated(new Date());
 			objMomDao.addNew(mom);
 			model.addAttribute("mom", mom);
-			sendEmailUsingSendGrid(mom.getMomsubject(), mom.getMom());
-			
+			sendEmailUsingSendGrid(mom.getMomsubject(), mom.getMom(), mom.getEmails());
+
 		} catch (Exception e) {
 			e.getMessage();
 		}
-		
+
 		return "newmoms_success";
 	}
 
@@ -74,19 +72,19 @@ public class MomsController {
 		} catch (Exception e) {
 			e.getMessage();
 		}
-//		String tempStr = "Deleted: " + mom.getId() + "-> " + mom.getMomsubject();
 		return "delete_success";
 
 	}
 
-	private void sendEmailUsingSendGrid(String sub, String body) {
+	private void sendEmailUsingSendGrid(String sub, String body, String emails) {
+		//String targetEmailReceipients = emails.
 		Email from = new Email("admin@free-moms.io");
 		String subject = sub;
-		Email to = new Email("jabed.talukder@bjitgroup.com");
+		Email to = new Email(emails);
 		Content content = new Content("text/plain", body);
 		Mail mail = new Mail(from, subject, to, content);
 
-		SendGrid sg = new SendGrid(SENDGRID_API_KEY);
+		SendGrid sg = new SendGrid(Constants.getSendgridAPIKeys());
 		Request request = new Request();
 		try {
 			request.method = Method.POST;

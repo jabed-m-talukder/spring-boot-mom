@@ -5,6 +5,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 import java.util.Date;
 
@@ -24,7 +25,11 @@ public class Moms {
 	@Column(name = "mom_subject")
 	private String momsubject;
 
-	@Column(name = "mom")
+	@Column(name = "email_addresses", columnDefinition = "TEXT")
+	private String emails;
+
+	@Lob
+	@Column(name = "mom", length = 1024)
 	private String mom;
 
 	@Column(name = "created_at", columnDefinition = "DATETIME", nullable = false)
@@ -56,6 +61,21 @@ public class Moms {
 
 	public int getId() {
 		return this.id;
+	}
+
+	/**
+	 * @return the emails
+	 */
+	public String getEmails() {
+		return emails;
+	}
+
+	/**
+	 * @param emails
+	 *            the emails to set
+	 */
+	public void setEmails(String emails) {
+		this.emails = emails;
 	}
 
 	public void setMomsubject(String momsubject) {

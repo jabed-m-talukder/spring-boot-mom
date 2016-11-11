@@ -11,26 +11,33 @@
 	<div th:include="fragments/js :: bootstrap"></div>
 	<div class="container">
 		<h1 class="header_logo">
-			<a th:href="@{/}"><img th:src="@{/img/meeting-minutes.png}"
-				width="100" height="100" alt="" /></a>
-				MoMs
+			<a th:href="@{/}"><img th:src="@{/img/logo_bjit.png}" width="120"
+				height="120" alt="" /></a> MoMs
 		</h1>
 	</div>
 	<div class="container" th:if="${not #lists.isEmpty(momsList)}">
 		<table class="table table-hover">
-						<a th:href="@{/newmoms}"><img th:src="@{/img/blue-add-note-new.png}"
-				width="50" height="50" alt="" align="right"/></a>
+			<a th:href="@{/newmoms}"><img
+				th:src="@{/img/blue-add-note-new.png}" width="50" height="50" alt=""
+				align="right" /></a>
 			<tr>
 				<th>ID</th>
+				<th>Emails</th>
 				<th>Subject</th>
 				<th>Details</th>
 				<th>Delete</th>
 			</tr>
 			<tr th:each="mom : ${momsList}">
 				<td th:text="${mom.getId()}"></td>
-				<td th:text="${mom.getMomsubject()}"></td>
-				<td th:text="${mom.getMom()}"></td>
-				<td><a th:href="@{'/delete?id=' + ${mom.getId()}}" class="btn btn-danger btn-sm">Delete</a></td>
+				<td th:text="${mom.getEmails()}"></td>
+				<td
+					th:utext="${#strings.replace(mom.getMomsubject(), T(System).getProperty('line.separator'), '&lt;br /&gt;')}">
+				</td>
+				<td
+					th:utext="${#strings.replace(mom.getMom(), T(System).getProperty('line.separator'), '&lt;br /&gt;')}">
+				</td>
+				<td><a th:href="@{'/delete?id=' + ${mom.getId()}}"
+					class="btn btn-danger btn-sm">Delete</a></td>
 			</tr>
 		</table>
 	</div>
