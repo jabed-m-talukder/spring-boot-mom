@@ -19,8 +19,8 @@
 			<p th:text="${mom.getEmails()}" />
 			<p th:utext="'Subject: ' + ${#strings.replace(mom.getMomsubject(), T(System).getProperty('line.separator'), '&lt;br /&gt;')}" />
 			<p th:utext="'Body: ' + ${#strings.replace(mom.getMom(), T(System).getProperty('line.separator'), '&lt;br /&gt;')}" />
-			<a th:href="@{'/newmoms'}" class="btn btn-default">Submit another moms</a>
-			<a th:href="@{'/'}" class="btn btn-default">Back</a>
+			<a th:href="@{'/'}" class="btn btn-default">Submit another moms</a>
+			<!--  a th:href="@{'/'}" class="btn btn-default">Back</a -->
 		</div>
 	</div>
 </body>

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 import com.sendgrid.Content;
 import com.sendgrid.Email;
 import com.sendgrid.Mail;
@@ -26,13 +25,13 @@ import com.talukder.mom.model.MomsDao;
 import com.talukder.mom.common.Constants;
 
 @Controller
-@RequestMapping(value = "/")
+// @RequestMapping(value = "/")
 public class MomsController {
 
 	@Autowired
 	private MomsDao objMomDao;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/momlist", method = RequestMethod.GET)
 	String index(Model model, HttpSession session) {
 		List<Moms> objMoms = objMomDao.list();
 		model.addAttribute("momsList", objMoms);
@@ -40,13 +39,13 @@ public class MomsController {
 
 	}
 
-	@RequestMapping(value = "/newmoms", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String createNewMoms(Model model) {
 		model.addAttribute("mom", new Moms());
 		return "new_moms";
 	}
 
-	@RequestMapping(value = "/newmoms", method = RequestMethod.POST)
+	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String submitNewMoms(@ModelAttribute Moms mom, Model model) {
 		try {
 			mom.setCreated(new Date());
@@ -77,11 +76,12 @@ public class MomsController {
 	}
 
 	private void sendEmailUsingSendGrid(String sub, String body, String emails) {
-		//String targetEmailReceipients = emails.
+		// String targetEmailReceipients = emails.
 		Email from = new Email("admin@free-moms.io");
 		String subject = sub;
 		Email to = new Email(emails);
 		Content content = new Content("text/plain", body);
+
 		Mail mail = new Mail(from, subject, to, content);
 
 		SendGrid sg = new SendGrid(Constants.getSendgridAPIKeys());

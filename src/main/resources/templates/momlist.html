@@ -14,12 +14,12 @@
 			<a th:href="@{/}"><img th:src="@{/img/logo_bjit.png}" width="120"
 				height="120" alt="" /></a> MoMs
 		</h1>
+		<a th:href="@{/}"><img
+			th:src="@{/img/blue-add-note-new.png}" width="50" height="50" alt=""
+			align="right" /></a>
 	</div>
 	<div class="container" th:if="${not #lists.isEmpty(momsList)}">
 		<table class="table table-hover">
-			<a th:href="@{/newmoms}"><img
-				th:src="@{/img/blue-add-note-new.png}" width="50" height="50" alt=""
-				align="right" /></a>
 			<tr>
 				<th>ID</th>
 				<th>Emails</th>
