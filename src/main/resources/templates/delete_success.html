@@ -11,16 +11,21 @@
 	<div th:include="fragments/js :: bootstrap"></div>
 	<div class="container">
 		<h1 class="header_logo">
-			<a th:href="@{/}"><img th:src="@{/img/logo_bjit.png}"
-				width="120" height="120" alt="" /></a>
+			<a th:href="@{/}"><img th:src="@{/img/logo_bjit.png}" width="120"
+				height="120" alt="" /></a>
 		</h1>
 		<div class="panel panel-default">
 			<div class="panel-heading">MoM deleted successfully</div>
 			<p th:text="${mom.getEmails()}" />
 			<p th:text="'Subject: ' + ${mom.getMomsubject()}" />
 			<p th:text="'Body: ' + ${mom.getMom()}" />
-			<a th:href="@{'/'}" class="btn btn-info">Back</a>
-			<a th:href="@{'/momlist'}" class="btn btn-info">MoMs List</a>
+		</div>
+
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<a th:href="@{'/'}" class="btn btn-info">Back</a> <a
+				th:href="@{'/momlist'}" class="btn btn-info">MoMs List</a>
 		</div>
 	</div>
 </body>

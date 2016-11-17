@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -32,7 +33,7 @@ public class MomsController {
 	private MomsDao objMomDao;
 
 	@RequestMapping(value = "/momlist", method = RequestMethod.GET)
-	String index(Model model, HttpSession session) {
+	String momList(Model model, HttpSession session) {
 		List<Moms> objMoms = objMomDao.list();
 		model.addAttribute("momsList", objMoms);
 		return "momlist";
@@ -61,8 +62,8 @@ public class MomsController {
 		return "newmoms_success";
 	}
 
-	@RequestMapping(value = "/delete")
-	String deleteMoms(int id, Model model) {
+	@RequestMapping(value = "/delete/{id}")
+	String deleteMoms( @PathVariable("id") int id, Model model) {
 		Moms mom = objMomDao.geMomsById(id);
 		model.addAttribute("mom", mom);
 		try {

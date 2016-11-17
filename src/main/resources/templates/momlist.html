@@ -36,7 +36,7 @@
 				<td
 					th:utext="${#strings.replace(mom.getMom(), T(System).getProperty('line.separator'), '&lt;br /&gt;')}">
 				</td>
-				<td><a th:href="@{'/delete?id=' + ${mom.getId()}}"
+				<td><a th:href="@{'/delete/' + ${mom.getId()}}"
 					class="btn btn-danger btn-sm">Delete</a></td>
 			</tr>
 		</table>
