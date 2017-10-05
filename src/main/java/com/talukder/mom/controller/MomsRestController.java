@@ -25,7 +25,7 @@ public class MomsRestController {
 	}
 
 	@RequestMapping(value = "/addNewMom", method = RequestMethod.POST)
-	public String submitNewMoms(@RequestBody Moms mom) {
+	public  String submitNewMoms(@RequestBody Moms mom) {
 		try {
 			mom.setCreated(new Date());
 			mom.setUpdated(new Date());

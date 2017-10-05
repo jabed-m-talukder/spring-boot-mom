@@ -18,6 +18,7 @@ import com.sendgrid.Content;
 import com.sendgrid.Email;
 import com.sendgrid.Mail;
 import com.sendgrid.Method;
+import com.sendgrid.Personalization;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
 import com.sendgrid.SendGrid;
@@ -78,19 +79,27 @@ public class MomsController {
 
 	private void sendEmailUsingSendGrid(String sub, String body, String emails) {
 		// String targetEmailReceipients = emails.
-		Email from = new Email("admin@free-moms.io");
+		Email from = new Email("free-moms@talukder.io");
 		String subject = sub;
 		Email to = new Email(emails);
 		Content content = new Content("text/plain", body);
 
 		Mail mail = new Mail(from, subject, to, content);
+//		Personalization personalization = new Personalization();
 
 		SendGrid sg = new SendGrid(Constants.getSendgridAPIKeys());
 		Request request = new Request();
 		try {
 			request.method = Method.POST;
 			request.endpoint = "mail/send";
-			request.body = mail.build();
+
+// 			Substitute template ID
+//			mail.setTemplateId("e2e95145-67aa-4ec4-a6b6-c497dc5c4941");
+//			personalization.addSubstitution("%userName%", "Abir");
+//		    mail.addPersonalization(personalization);
+
+		    request.body = mail.build();
+
 			Response response = sg.api(request);
 			System.out.println(response.statusCode);
 			System.out.println(response.body);
