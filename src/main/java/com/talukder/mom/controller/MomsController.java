@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +20,12 @@ import com.sendgrid.Content;
 import com.sendgrid.Email;
 import com.sendgrid.Mail;
 import com.sendgrid.Method;
-import com.sendgrid.Personalization;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
 import com.sendgrid.SendGrid;
 import com.talukder.mom.domain.Moms;
 import com.talukder.mom.model.MomsDao;
+
 import com.talukder.mom.common.Constants;
 
 @Controller
@@ -32,6 +34,8 @@ public class MomsController {
 
 	@Autowired
 	private MomsDao objMomDao;
+
+	private static final Logger log = LoggerFactory.getLogger(MomsController.class);
 
 	@RequestMapping(value = "/momlist", method = RequestMethod.GET)
 	String momList(Model model, HttpSession session) {
@@ -64,7 +68,7 @@ public class MomsController {
 	}
 
 	@RequestMapping(value = "/delete/{id}")
-	String deleteMoms( @PathVariable("id") int id, Model model) {
+	String deleteMoms(@PathVariable("id") int id, Model model) {
 		Moms mom = objMomDao.geMomsById(id);
 		model.addAttribute("mom", mom);
 		try {
@@ -85,20 +89,21 @@ public class MomsController {
 		Content content = new Content("text/plain", body);
 
 		Mail mail = new Mail(from, subject, to, content);
-//		Personalization personalization = new Personalization();
+		// Personalization personalization = new Personalization();
 
+		log.info(Constants.getSendgridAPIKeys());
 		SendGrid sg = new SendGrid(Constants.getSendgridAPIKeys());
 		Request request = new Request();
 		try {
 			request.method = Method.POST;
 			request.endpoint = "mail/send";
 
-// 			Substitute template ID
-//			mail.setTemplateId("e2e95145-67aa-4ec4-a6b6-c497dc5c4941");
-//			personalization.addSubstitution("%userName%", "Abir");
-//		    mail.addPersonalization(personalization);
+			// Substitute template ID
+			// mail.setTemplateId("e2e95145-67aa-4ec4-a6b6-c497dc5c4941");
+			// personalization.addSubstitution("%userName%", "Abir");
+			// mail.addPersonalization(personalization);
 
-		    request.body = mail.build();
+			request.body = mail.build();
 
 			Response response = sg.api(request);
 			System.out.println(response.statusCode);

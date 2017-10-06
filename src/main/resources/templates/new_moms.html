@@ -15,8 +15,8 @@
 				height="120" alt="" /></a>
 		</h1>
 		<h2 class="header_logo">
-		<a th:href="@{'/momlist'}" class="btn btn-info">List</a>
-		</h1>
+			<a th:href="@{'/momlist'}" class="btn btn-info">List</a>
+		</h2>
 
 		<form action="#" th:action="@{/}" th:object="${mom}"
 			class="form-horizontal" method="post">
@@ -49,8 +49,8 @@
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<input type="reset" class="btn btn-warning" value="Reset" />
-					<input type="submit" class="btn btn-default" value="Submit" />  
+					<input type="reset" class="btn btn-warning" value="Reset" /> <input
+						type="submit" class="btn btn-default" value="Submit" />
 					<!-- a th:href="@{'/'}" class="btn btn-info">Back</a> -->
 				</div>
 			</div>
